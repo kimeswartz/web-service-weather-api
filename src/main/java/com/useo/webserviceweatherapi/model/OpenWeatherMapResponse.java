@@ -4,6 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OpenWeatherMapResponse {
 
+    /**
+     * This class represents the structure of the response from the OpenWeatherMap API.
+     * This class is used to map the JSON response from the OpenWeatherMap API
+     * into Java objects, making it easier to work with the data in the application.
+     */
+
     @JsonProperty("name")
     private String cityName;
 

@@ -1,27 +1,28 @@
 package com.useo.webserviceweatherapi.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class WeatherInformation {
 
-    private Main main;
-    private Weather[] weather;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
+    private double temperature;
+    private String description;
 
     // Getters and setters
-
-    public Main getMain() {
-        return main;
+    public Long getId() {
+        return id;
     }
 
-    public void setMain(Main main) {
-        this.main = main;
-    }
-
-    public Weather[] getWeather() {
-        return weather;
-    }
-
-    public void setWeather(Weather[] weather) {
-        this.weather = weather;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -32,57 +33,19 @@ public class WeatherInformation {
         this.name = name;
     }
 
-    // Inner classes
-    public static class Main {
-        private double temp;
-        private int pressure;
-        private int humidity;
-
-        // Getters and setters
-        public double getTemp() {
-            return temp;
-        }
-
-        public void setTemp(double temp) {
-            this.temp = temp;
-        }
-
-        public int getPressure() {
-            return pressure;
-        }
-
-        public void setPressure(int pressure) {
-            this.pressure = pressure;
-        }
-
-        public int getHumidity() {
-            return humidity;
-        }
-
-        public void setHumidity(int humidity) {
-            this.humidity = humidity;
-        }
+    public double getTemperature() {
+        return temperature;
     }
 
-    public static class Weather {
-        private String description;
-        private String icon;
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
+    }
 
-        // Getters and setters
-        public String getDescription() {
-            return description;
-        }
+    public String getDescription() {
+        return description;
+    }
 
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        public String getIcon() {
-            return icon;
-        }
-
-        public void setIcon(String icon) {
-            this.icon = icon;
-        }
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

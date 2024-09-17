@@ -1,6 +1,8 @@
 package com.useo.webserviceweatherapi.service;
 
+import com.useo.webserviceweatherapi.WeatherService;
 import com.useo.webserviceweatherapi.model.WeatherInformation;
+import com.useo.webserviceweatherapi.repository.WeatherRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.web.client.RestTemplate;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class WeatherServiceTest {
@@ -20,22 +21,36 @@ public class WeatherServiceTest {
     @MockBean
     private RestTemplate restTemplate;
 
+    @MockBean
+    private WeatherRepository weatherRepository;
+
     @Test
     public void testGetWeatherData() {
-        // Prepare mock response
+        // Mock WeatherInformation object
         WeatherInformation mockWeatherInfo = new WeatherInformation();
         mockWeatherInfo.setName("Stockholm");
-        // Set other properties of mockWeatherInfo as needed
+        mockWeatherInfo.setTemperature(15.0);
+        mockWeatherInfo.setDescription("Clear sky");
 
-        Mockito.when(restTemplate.getForObject(anyString(), Mockito.eq(WeatherInformation.class)))
+        // Set up mock behavior
+        Mockito.when(restTemplate.getForObject(Mockito.anyString(), Mockito.eq(WeatherInformation.class)))
+                .thenReturn(mockWeatherInfo);
+        Mockito.when(weatherRepository.save(Mockito.any(WeatherInformation.class)))
                 .thenReturn(mockWeatherInfo);
 
-        // Call the method under test
-        WeatherInformation result = weatherService.getWeatherData(59.3293, 18.0686); // Stockholm coordinates
+        // Call the service method
+        WeatherInformation result = weatherService.getWeatherData("Stockholm");
 
-        // Verify results
+        // Print details to the console
+        System.out.println("Result from weatherService.getWeatherData('Stockholm'):");
+        System.out.println("Name: " + result.getName());
+        System.out.println("Temperature: " + result.getTemperature());
+        System.out.println("Description: " + result.getDescription());
+
+        // Assertions
         assertNotNull(result);
-        assertNotNull(result.getName());
-        // Add more assertions as needed
+        assertEquals("Stockholm", result.getName());
+        assertEquals(15.0, result.getTemperature());
+        assertEquals("Clear sky", result.getDescription());
     }
 }

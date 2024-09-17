@@ -1,9 +1,7 @@
 package com.useo.webserviceweatherapi.controller;
 
-
-import com.useo.webserviceweatherapi.WeatherService;
 import com.useo.webserviceweatherapi.model.WeatherInformation;
-
+import com.useo.webserviceweatherapi.service.WeatherService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

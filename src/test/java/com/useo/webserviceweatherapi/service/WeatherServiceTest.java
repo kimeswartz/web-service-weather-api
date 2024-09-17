@@ -1,6 +1,6 @@
 package com.useo.webserviceweatherapi.service;
 
-import com.useo.webserviceweatherapi.WeatherService;
+import com.useo.webserviceweatherapi.service.WeatherService;
 import com.useo.webserviceweatherapi.model.WeatherInformation;
 import com.useo.webserviceweatherapi.repository.WeatherRepository;
 import org.junit.jupiter.api.Test;
